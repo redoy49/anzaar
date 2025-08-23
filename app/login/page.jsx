@@ -1,15 +1,11 @@
 "use client"
 import { useState } from "react"
 import { signIn } from "next-auth/react"
-import { useRouter } from "next/navigation"
-import { signInWithGoogle } from "../../lib/firebase"
 
 export default function LoginPage() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const router = useRouter()
 
-  // Handle credential login
   const handleSubmit = async (e) => {
     e.preventDefault()
     await signIn("credentials", {
@@ -19,17 +15,6 @@ export default function LoginPage() {
     })
   }
 
-  // Handle Firebase Google login
-  const handleGoogleLogin = async () => {
-    try {
-      const user = await signInWithGoogle()
-      console.log("Logged in user:", user)
-      router.push("/products")
-    } catch (err) {
-      alert("Google login failed. Check console for details.")
-    }
-  }
-
   return (
     <div className="flex items-center justify-center h-screen bg-gray-100">
       <div className="bg-white p-6 rounded-lg shadow-md w-80">
@@ -37,7 +22,7 @@ export default function LoginPage() {
 
         {/* Google Login */}
         <button
-          onClick={handleGoogleLogin}
+          onClick={() => signIn("google", { callbackUrl: "/products" })}
           className="w-full bg-red-500 text-white py-2 rounded mb-4 hover:bg-red-600"
         >
           Login with Google

@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
 import { useSession } from "next-auth/react"
+import { useRouter } from "next/navigation"
 import toast from "react-hot-toast"
 
 export default function AddProductPage() {
@@ -9,21 +9,20 @@ export default function AddProductPage() {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
 
-  // Redirect if not logged in
+  // Redirect unauthenticated users
   useEffect(() => {
     if (status === "unauthenticated") {
       router.push("/login")
     }
   }, [status, router])
 
-  if (status === "loading") {
-    return <p className="text-center mt-10">Checking authentication...</p>
-  }
-
-  // If user is not logged in, don’t render the page
+  // Show loading while checking session
+  if (status === "loading") return <p className="text-center mt-10">Checking authentication...</p>
+  
+  // Don't render page if no session
   if (!session) return null
 
-  // --- form state ---
+  // Form state
   const [name, setName] = useState("")
   const [description, setDescription] = useState("")
   const [price, setPrice] = useState("")
@@ -41,7 +40,7 @@ export default function AddProductPage() {
 
       if (res.ok) {
         toast.success("Product added successfully!")
-        router.push("/products")
+        router.push("/products") // redirect to product list
       } else {
         toast.error("Failed to add product")
       }
@@ -55,7 +54,6 @@ export default function AddProductPage() {
   return (
     <div className="max-w-3xl mx-auto px-6 py-16">
       <h1 className="text-2xl font-bold mb-6">Add New Product</h1>
-
       <form onSubmit={handleSubmit} className="space-y-4 bg-white p-6 shadow rounded">
         <input
           type="text"

@@ -1,17 +1,16 @@
 import "./globals.css"
 import Providers from "./Providers"
-
-export const metadata = {
-  title: "My App",
-  description: "Next.js App with Products",
-}
+import Navbar from "./components/Navbar"
+import Footer from "./components/Footer"
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="bg-gray-50">
+      <body className="flex flex-col min-h-screen">
         <Providers>
-          {children}
+          <Navbar />
+          <main className="flex-grow">{children}</main>
+          <Footer />
         </Providers>
       </body>
     </html>
