@@ -24,7 +24,7 @@ export default function ProductsPage() {
         {products.map((product) => (
           <div
             key={product.id}
-            className="col-span-6 lg:col-span-3 flex flex-col"
+            className="col-span-12 md:col-span-6 lg:col-span-3 flex flex-col"
           >
             {/* Product Image */}
             <Link href={`/products/${product.id}`}>

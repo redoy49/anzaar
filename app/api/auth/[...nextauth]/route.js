@@ -1,14 +1,8 @@
 import NextAuth from "next-auth"
-import GoogleProvider from "next-auth/providers/google"
 import CredentialsProvider from "next-auth/providers/credentials"
 
 export const authOptions = {
   providers: [
-    // Google login
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    }),
     // Credentials login
     CredentialsProvider({
       name: "Credentials",
@@ -17,7 +11,6 @@ export const authOptions = {
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials) {
-        // hardcoded for demo
         if (
           credentials.email === "admin@test.com" &&
           credentials.password === "123456"
