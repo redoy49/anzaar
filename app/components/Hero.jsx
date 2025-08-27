@@ -17,7 +17,7 @@ export default function Hero() {
 
       <div className="flex justify-center items-center gap-4 flex-wrap">
         {/* Primary Button */}
-        <Link href="/products">
+        <Link href="/View Products">
           <button className="bg-indigo-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-indigo-700 transition-colors duration-300 ease-in-out flex items-center gap-2">
             Try for Free
             <svg
@@ -39,7 +39,7 @@ export default function Hero() {
         {/* Secondary Button */}
         <Link href="/login">
           <button className="bg-white text-gray-800 font-semibold py-3 px-8 rounded-full border border-gray-300 shadow-sm hover:bg-gray-100 hover:border-gray-400 transition-all duration-300 ease-in-out">
-            Download Now
+            SignIn Now
           </button>
         </Link>
       </div>
